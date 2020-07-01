@@ -1,0 +1,89 @@
+% Compartments
+extracellular 3 100
+cell_membrane 2 12.3 extracellular
+cell 3 1 cell_membrane
+
+% Agents
+egf(l)
+
+erbb1(l,d,Y1068~P,Y1086~P)
+
+grb2(sh2,sh3N,sh3C)
+sos(g,r)
+hras(s,nuc~GDP~GTP)
+
+
+% Seeds extracellular
+egf(l) 1000
+
+% Seeds cell_membrane
+erbb1(l,d,Y1068,Y1086) 100
+hras(s,nuc~GDP)         40
+
+% Seeds cell
+grb2(sh2,sh3N,sh3C) 1000
+sos(g,r) 100
+
+
+% Observables
+ErbB1#pY1068 erbb1(Y1068~P-?)
+ErbB1#pY1086 erbb1(Y1086~P-?)
+
+% Parameters
+egf_erbb1_on                        1
+egf_erbb1_off                       1
+erbb1_erbb1_on                      1
+erbb1_erbb1_off                     1
+erbb1_phosphorylates_erbb1_Y992     1
+erbb1_phosphorylates_erbb1_Y1068    1
+erbb1_phosphorylates_erbb1_Y1086    1
+erbb1_phosphorylates_erbb1_Y1148    1
+erbb1_phosphorylates_erbb1_Y1173    1
+erbb1_pY1068_grb2_on_3              1
+erbb1_pY1068_grb2_on_2              1
+erbb1_pY1068_grb2_off               1
+erbb1_pY1086_grb2_on_3              1
+erbb1_pY1086_grb2_on_2              1
+erbb1_pY1086_grb2_off               1
+grb2_sh3N_sos_on_3                  1
+grb2_sh3N_sos_on_2                  1
+grb2_sh3N_sos_off                   1
+grb2_sh3C_sos_on_3                  1
+grb2_sh3C_sos_on_2                  1
+grb2_sh3C_sos_off                   1
+sos_hras_on_3                       1
+sos_hras_on_2                       1
+sos_hras_off                        1
+sos_activates_hras                  1
+ras_inactivation                    1
+
+% Rules
+
+# Ligand binding
+egf(l) + erbb1(l,d) <-> egf(l-1).erbb1(l-1,d) egf_erbb1_on egf_erbb1_off
+
+# Receptor dimerization
+erbb1(l-!0,d) + erbb1(l-!0,d) <-> erbb1(l-!0,d-1).erbb1(l-!0,d-1) erbb1_erbb1_on erbb1_erbb1_off
+
+## Receptor trans-phosphorylation
+# ErbB1 phosphorylation of ErbB1
+erbb1(d-erbb1@d,Y1068~0) -> erbb1(d-erbb1@d,Y1068~P) erbb1_phosphorylates_erbb1_Y1068
+erbb1(d-erbb1@d,Y1086~0) -> erbb1(d-erbb1@d,Y1086~P) erbb1_phosphorylates_erbb1_Y1086
+
+## Adaptor binding
+# Grb2 binding erbB1
+erbb1(Y1068~P) + grb2(sh2) <-> erbb1(Y1068~P-1).grb2(sh2-1)     (erbb1_pY1068_grb2_on_3@3, erbb1_pY1068_grb2_on_2@2)       erbb1_pY1068_grb2_off
+erbb1(Y1086~P) + grb2(sh2) <-> erbb1(Y1086~P-1).grb2(sh2-1)     (erbb1_pY1086_grb2_on_3@3, erbb1_pY1086_grb2_on_2@2)       erbb1_pY1086_grb2_off
+
+# Sos binding grb2
+grb2(sh3N) + sos(g) <-> grb2(sh3N-1).sos(g-1)    	(grb2_sh3N_sos_on_3@3, grb2_sh3N_sos_on_2@2)     grb2_sh3N_sos_off
+#grb2(sh3C) + sos(g) <-> grb2(sh3C-1).sos(g-1)       (grb2_sh3C_sos_on_3@3, grb2_sh3C_sos_on_2@2)     grb2_sh3C_sos_off
+
+# Ras binding Sos
+sos(r) + hras(s) <-> sos(r-1).hras(s-1)               (sos_hras_on_3@3, sos_hras_on_2@2) 	sos_hras_off
+
+# Ras activation by Sos
+sos(r-1).hras(s-1,nuc~GDP) -> sos(r-1).hras(s-1,nuc~GTP)  	sos_activates_hras
+
+# Ras self inactivation
+hras(nuc~GTP) -> hras(nuc~GDP)    ras_inactivation

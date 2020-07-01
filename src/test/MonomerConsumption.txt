@@ -1,0 +1,27 @@
+% Compartments
+extracellular 3 100
+cell_membrane 2 1 extracellular
+
+% Agents
+egf(l)
+egfr(l,Y1068~P)
+
+% Seeds extracellular
+egf(l) 1000
+
+% Seeds cell_membrane
+egfr(l,Y1068) 100
+
+% Observables
+EGFR#pY1068 egfr(Y1068~P)
+
+% Parameters
+kon 20
+koff 7
+kcat68 50
+kdecay 5
+
+% Rules
+egfr(Y1068~P) -> 0 kdecay
+egf(l) + egfr(l) <-> egf(l-1).egfr(l-1) kon koff
+egfr(l-!0,Y1068) -> egfr(l-!0,Y1068~P) kcat68

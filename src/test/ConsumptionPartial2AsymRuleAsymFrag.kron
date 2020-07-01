@@ -1,0 +1,23 @@
+% Compartments 
+v 3 1.0
+
+% Seeds 
+A(d-1;p~P)@{v}:A(d-1;p~P)@{v} 1.0
+A(d-1;p)@{v}:A(d-1;p~P)@{v} 1.0
+A(d-1;p)@{v}:A(d-1;p)@{v} 1.0
+
+% Species v
+A(d-1;p~P)@{v}:A(d-1;p~P)@{v} A(d-1;p~P)@{v}:A(d-1;p~P)@{v}
+A(d-1;p~P)@{v}:A(d-1;p)@{v} A(d-1;p)@{v}:A(d-1;p~P)@{v}
+
+% Outputs
+A#P ^v\.A\(d-1;p~P\)@\{v\}:A\(d-1;p\)@\{v\}$,^v\.A\(d-1;p~P\)@\{v\}:A\(d-1;p~P\)@\{v\}$=2.0
+
+% Parameters
+k 1.0
+
+% Reactions
+v.A(d-1;p~P)@{v}:A(d-1;p~P)@{v} 0 0 0 k*2 0
+
+v.A(d-1;p~P)@{v}:A(d-1;p)@{v} 0 0 0 k 0
+

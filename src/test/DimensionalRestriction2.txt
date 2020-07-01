@@ -1,0 +1,36 @@
+% Compartments
+solution 3 100
+membrane 2 1 solution
+
+% Agents
+l(a,m)
+m(l,b)
+a(l)
+b(m)
+
+% Seeds
+l(a,m)@solution 100
+m(l,b)@solution 200
+a(l)@membrane 10
+b(m)@membrane 20
+
+% Observables
+A-L a(l-1).l(a-1)
+L-M l(m-1).m(l-1)
+M-B m(b-1).b(m-1)
+
+% Parameters
+a_on_l_3 10
+a_on_l_2 50
+a_off_l 30
+m_on_b_3 20
+m_on_b_2 10
+m_off_b 25
+l_on_m_3 5
+l_on_m_2 45
+l_off_m 15
+
+% Rules
+a(l) + l(a) <-> a(l-1).l(a-1)   (a_on_l_3@3, a_on_l_2@2) a_off_l
+l(m) + m(l) <-> l(m-1).m(l-1)   (l_on_m_3@3, l_on_m_2@2) l_off_m
+b(m) + m(b) <-> b(m-1).m(b-1)   (m_on_b_3@3, m_on_b_2@2) m_off_b

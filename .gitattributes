@@ -1,0 +1,4 @@
+* text=auto
+*.scala text eol=lf
+*.txt text eol=lf
+*.kron eol=lf

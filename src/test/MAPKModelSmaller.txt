@@ -1,0 +1,365 @@
+% Compartments
+extracellular 3 1
+cell_membrane 2 1 extracellular
+cell 3 1 cell_membrane
+nuclear_membrane 2 1 cell
+nucleus 3 1 nuclear_membrane
+
+
+% Agents
+egf(l)
+
+erbb1(l,d,Y992~P,Y1045~P,Y1068~P,Y1086~P,Y1148~P,Y1173~P,ub~ub)
+erbb2(d,Y877~P,Y1023~P,Y1139~P,Y1196~P,Y1221~P,Y1248~P)
+
+grb2(sh2,sh3N,sh3C)
+shc(sh2,ptb,Y239~P,Y240~P,Y317~P)
+sos(pp,r)
+hras(s,nuc~{GDP,GTP})
+vhr(k)
+
+braf(r,f,s,S365~{P,P14_3_3g})
+ksr1(f,s,S392~{P,P14_3_3g})
+mek1(f,s,S218~P,S222~P)
+erk1(f,s,T202~P,Y204~P)
+pp2a(r)
+
+
+% Seeds extracellular
+egf(l) 1
+
+% Seeds cell_membrane
+erbb1(l,d,Y992,Y1045,Y1068,Y1086,Y1148,Y1173,ub)    1
+erbb2(d,Y877,Y1023,Y1139,Y1196,Y1221,Y1248)                   1
+
+hras(s,nuc~GDP)         1
+
+% Seeds cell
+grb2(sh2,sh3N,sh3C)             1
+shc(sh2,ptb,Y239,Y240,Y317)     1
+sos(pp,r)                       1
+
+braf(r,f,s,S365~P)      1
+ksr1(f,s,S392~P)        1
+mek1(f,s,S218,S222)     1
+erk1(f,s,T202,Y204)     1
+pp2a(r)                 1
+
+% Seeds nucleus
+vhr(k)                  1
+
+
+% Observables
+EGFR#pY1045 erbb1(Y1045~P-?,Y1068-?)
+EGFR#pY1068 erbb1(Y1045-?,Y1068~P-?)
+EGFR#pY1045#pY1068 erbb1(Y1045~P-?,Y1068~P-?)
+EGFR#pY1086 erbb1(Y1086~P-?)
+EGFR#pY1148 erbb1(Y1148~P-?)
+EGFR#pY1173 erbb1(Y1173~P-?)
+
+HER2#pY877 erbb2(Y877~P-?)
+HER2#pY1023 erbb2(Y1023~P-?)
+HER2#pY1248 erbb2(Y1248~P-?)
+
+Shc#pY317 shc(Y317~P-?)
+
+Erk1#pY204 erk1(T202-?,Y204~P-?)
+Erk1#pY202#pY204 erk1(T202~P-?,Y204~P-?)
+
+
+% Parameters
+egf_erbb1_on                        1
+egf_erbb1_off                       1
+erbb1_erbb1_on                      1
+erbb1_erbb1_off                     1
+erbb1_erbb2_on                      1
+erbb1_erbb2_off                     1
+
+erbb1_phosphorylates_erbb1_Y992     1
+erbb1_phosphorylates_erbb1_Y1045    1
+erbb1_phosphorylates_erbb1_Y1068    1
+erbb1_phosphorylates_erbb1_Y1086    1
+erbb1_phosphorylates_erbb1_Y1148    1
+erbb1_phosphorylates_erbb1_Y1173    1
+erbb2_phosphorylates_erbb2_Y877     1
+erbb2_phosphorylates_erbb2_Y1023    1
+erbb2_phosphorylates_erbb2_Y1139    1
+erbb2_phosphorylates_erbb2_Y1196    1
+erbb2_phosphorylates_erbb2_Y1221    1
+erbb2_phosphorylates_erbb2_Y1248    1
+erbb2_phosphorylates_erbb1_Y992     1
+erbb2_phosphorylates_erbb1_Y1045    1
+erbb2_phosphorylates_erbb1_Y1068    1
+erbb2_phosphorylates_erbb1_Y1086    1
+erbb2_phosphorylates_erbb1_Y1148    1
+erbb2_phosphorylates_erbb1_Y1173    1
+erbb1_dephosphorylation_Y992     1
+erbb1_dephosphorylation_Y1045    1
+erbb1_dephosphorylation_Y1068    1
+erbb1_dephosphorylation_Y1086    1
+erbb1_dephosphorylation_Y1148    1
+erbb1_dephosphorylation_Y1173    1
+erbb2_dephosphorylation_Y877     1
+erbb2_dephosphorylation_Y1023    1
+erbb2_dephosphorylation_Y1139    1
+erbb2_dephosphorylation_Y1196    1
+erbb2_dephosphorylation_Y1221    1
+erbb2_dephosphorylation_Y1248    1
+
+erbb1_pY1068_grb2_on_3              1
+erbb1_pY1068_grb2_on_2              1
+erbb1_pY1068_grb2_off               1
+erbb1_pY1086_grb2_on_3              1
+erbb1_pY1086_grb2_on_2              1
+erbb1_pY1086_grb2_off               1
+erbb1_pY992_shc_sh2_on_3            1
+erbb1_pY992_shc_sh2_on_2            1
+erbb1_pY992_shc_sh2_off             1
+erbb1_pY1148_shc_sh2_on_3           1
+erbb1_pY1148_shc_sh2_on_2           1
+erbb1_pY1148_shc_sh2_off            1
+erbb1_pY1173_shc_sh2_on_3           1
+erbb1_pY1173_shc_sh2_on_2           1
+erbb1_pY1173_shc_sh2_off            1
+erbb2_pY1139_grb2_on_3              1
+erbb2_pY1139_grb2_on_2              1
+erbb2_pY1139_grb2_off               1
+erbb2_pY1196_shc_sh2_on_3           1
+erbb2_pY1196_shc_sh2_on_2           1
+erbb2_pY1196_shc_sh2_off            1
+erbb2_pY1221_shc_sh2_on_3           1
+erbb2_pY1221_shc_sh2_on_2           1
+erbb2_pY1221_shc_sh2_off            1
+erbb2_pY1248_shc_sh2_on_3           1
+erbb2_pY1248_shc_sh2_on_2           1
+erbb2_pY1248_shc_sh2_off            1
+erbb1_phosphorylates_shc_Y317       1
+erbb2_phosphorylates_shc_Y317       1
+shc_dephosphorylation_Y317          1
+shc_Y317_grb2_on_3                  1
+shc_Y317_grb2_on_2                  1
+shc_Y317_grb2_off                   1
+grb2_sh3N_sos_on_3                  1
+grb2_sh3N_sos_on_2                  1
+grb2_sh3N_sos_off                   1
+sos_hras_on_3                       1
+sos_hras_on_2                       1
+sos_hras_off                        1
+sos_activates_hras                  1
+ras_inactivation                    1
+
+_14_3_3g_braf_self_on               1
+_14_3_3g_braf_self_off              1
+_14_3_3g_ksr1_self_on               1
+_14_3_3g_ksr1_self_on               1
+hras_braf_on_3                      1
+hras_braf_on_2                      1
+hras_braf_off                       1
+braf_braf_on_3                      1
+braf_braf_on_2                      1
+braf_braf_off                       1
+braf_ksr1_on                        1
+braf_ksr1_off                       1
+braf_phosphorylates_mek1_S218_3     1
+braf_phosphorylates_mek1_S218_2     1
+braf_phosphorylates_mek1_S222_3     1
+braf_phosphorylates_mek1_S222_2     1
+mek_dephosphorylation_S218          1
+mek_dephosphorylation_S222          1
+mek1_phosphorylates_erk1_T202       1
+mek1_phosphorylates_erk1_Y204       1
+ksr1_mek1_on                        1
+ksr1_mek1_off                       1
+mek1_erk1_on                        1
+mek1_erk1_off                       1
+mek1_phosphorylates_erk1_T202       1
+mek1_phosphorylates_erk1_Y204       1
+pp2a_dephosphorylates_braf_S365     1
+braf_pp2a_on                        1
+braf_pp2a_off                       1
+ksr1_pp2a_on                        1
+ksr1_pp2a_off                       1
+erk1_erk1_on                        1
+erk1_erk1_off                       1
+erk1_dephosphorylation_T202         1
+
+erbb1_ubiquitination                1
+erbb1_polyubiquitinated_degredation 1
+
+erk_dimer_nuclear_import            1
+vhr_erk1_on                         1
+vhr_erk1_off                        1
+vhr_dephosphorylates_erk1_Y204      1
+erk_nuclear_export                  1
+
+% Rules
+
+# Ligand binding
+egf(l) + erbb1(l,d) <-> egf(l-1).erbb1(l-1,d) egf_erbb1_on egf_erbb1_off
+
+# Receptor dimerization
+egf(l-1).erbb1(l-1,d) + egf(l-2).erbb1(l-2,d) <-> egf(l-1).erbb1(l-1,d-3).erbb1(l-2,d-3).egf(l-2)   erbb1_erbb1_on erbb1_erbb1_off
+egf(l-1).erbb1(l-1,d) + erbb2(d) <-> egf(l-1).erbb1(l-1,d-2).erbb2(d-2)             erbb1_erbb2_on erbb1_erbb2_off
+
+
+## Receptor trans-phosphorylation
+# ErbB1 phosphorylation of ErbB1
+erbb1(d-erbb1@d,Y992) -> erbb1(d-erbb1@d,Y992~P) erbb1_phosphorylates_erbb1_Y992
+erbb1(d-erbb1@d,Y1045) -> erbb1(d-erbb1@d,Y1045~P) erbb1_phosphorylates_erbb1_Y1045
+erbb1(d-erbb1@d,Y1068) -> erbb1(d-erbb1@d,Y1068~P) erbb1_phosphorylates_erbb1_Y1068
+erbb1(d-erbb1@d,Y1086) -> erbb1(d-erbb1@d,Y1086~P) erbb1_phosphorylates_erbb1_Y1086
+erbb1(d-erbb1@d,Y1148) -> erbb1(d-erbb1@d,Y1148~P) erbb1_phosphorylates_erbb1_Y1148
+erbb1(d-erbb1@d,Y1173) -> erbb1(d-erbb1@d,Y1173~P) erbb1_phosphorylates_erbb1_Y1173
+
+# ErbB1 phosphorylation of ErbB2
+erbb2(d-erbb1@d,Y877) -> erbb2(d-erbb1@d,Y877~P) erbb2_phosphorylates_erbb2_Y877
+erbb2(d-erbb1@d,Y1023) -> erbb2(d-erbb1@d,Y1023~P) erbb2_phosphorylates_erbb2_Y1023
+erbb2(d-erbb1@d,Y1139) -> erbb2(d-erbb1@d,Y1139~P) erbb2_phosphorylates_erbb2_Y1139
+erbb2(d-erbb1@d,Y1196) -> erbb2(d-erbb1@d,Y1196~P) erbb2_phosphorylates_erbb2_Y1196
+erbb2(d-erbb1@d,Y1221) -> erbb2(d-erbb1@d,Y1221~P) erbb2_phosphorylates_erbb2_Y1221
+erbb2(d-erbb1@d,Y1248) -> erbb2(d-erbb1@d,Y1248~P) erbb2_phosphorylates_erbb2_Y1248
+
+# ErbB2 phosphorylation of ErbB1
+erbb1(d-erbb2@d,Y992) -> erbb1(d-erbb2@d,Y992~P) erbb2_phosphorylates_erbb1_Y992
+erbb1(d-erbb2@d,Y1045) -> erbb1(d-erbb2@d,Y1045~P) erbb2_phosphorylates_erbb1_Y1045
+erbb1(d-erbb2@d,Y1068) -> erbb1(d-erbb2@d,Y1068~P) erbb2_phosphorylates_erbb1_Y1068
+erbb1(d-erbb2@d,Y1086) -> erbb1(d-erbb2@d,Y1086~P) erbb2_phosphorylates_erbb1_Y1086
+erbb1(d-erbb2@d,Y1148) -> erbb1(d-erbb2@d,Y1148~P) erbb2_phosphorylates_erbb1_Y1148
+erbb1(d-erbb2@d,Y1173) -> erbb1(d-erbb2@d,Y1173~P) erbb2_phosphorylates_erbb1_Y1173
+
+## Receptor dephosphorylation
+# ErbB1 non-mechanistic dephosphorylation
+erbb1(Y992~P)  -> erbb1(Y992)  erbb1_dephosphorylation_Y992
+erbb1(Y1045~P) -> erbb1(Y1045) erbb1_dephosphorylation_Y1045
+erbb1(Y1068~P) -> erbb1(Y1068) erbb1_dephosphorylation_Y1068
+erbb1(Y1086~P) -> erbb1(Y1086) erbb1_dephosphorylation_Y1086
+erbb1(Y1148~P) -> erbb1(Y1148) erbb1_dephosphorylation_Y1148
+erbb1(Y1173~P) -> erbb1(Y1173) erbb1_dephosphorylation_Y1173
+
+# ErbB2 non-mechanistic dephosphorylation
+erbb2(Y877~P)  -> erbb2(Y877)  erbb2_dephosphorylation_Y877
+erbb2(Y1023~P) -> erbb2(Y1023) erbb2_dephosphorylation_Y1023
+erbb2(Y1139~P) -> erbb2(Y1139) erbb2_dephosphorylation_Y1139
+erbb2(Y1196~P) -> erbb2(Y1196) erbb2_dephosphorylation_Y1196
+erbb2(Y1221~P) -> erbb2(Y1221) erbb2_dephosphorylation_Y1221
+erbb2(Y1248~P) -> erbb2(Y1248) erbb2_dephosphorylation_Y1248
+
+
+## Adaptor binding
+# Grb2 binding erbb1
+erbb1(Y1068~P) + grb2(sh2) <-> erbb1(Y1068~P-1).grb2(sh2-1)     (erbb1_pY1068_grb2_on_3@3, erbb1_pY1068_grb2_on_2@2)       erbb1_pY1068_grb2_off
+erbb1(Y1086~P) + grb2(sh2) <-> erbb1(Y1086~P-1).grb2(sh2-1)     (erbb1_pY1086_grb2_on_3@3, erbb1_pY1086_grb2_on_2@2)       erbb1_pY1086_grb2_off
+
+# Grb2 binding erbb2
+erbb2(Y1139~P) + grb2(sh2) <-> erbb2(Y1139~P-1).grb2(sh2-1)     (erbb2_pY1139_grb2_on_3@3, erbb2_pY1139_grb2_on_2@2)    erbb2_pY1139_grb2_off
+
+# Shc binding erbb1
+erbb1(Y992~P) + shc(sh2)  <-> erbb1(Y992~P-1).shc(sh2-1)        (erbb1_pY992_shc_sh2_on_3@3, erbb1_pY992_shc_sh2_on_2@2)         erbb1_pY992_shc_sh2_off
+erbb1(Y1148~P) + shc(sh2) <-> erbb1(Y1148~P-1).shc(sh2-1)       (erbb1_pY1148_shc_sh2_on_3@3, erbb1_pY1148_shc_sh2_on_2@2)       erbb1_pY1148_shc_sh2_off
+erbb1(Y1173~P) + shc(sh2) <-> erbb1(Y1173~P-1).shc(sh2-1)       (erbb1_pY1173_shc_sh2_on_3@3, erbb1_pY1173_shc_sh2_on_2@2)       erbb1_pY1173_shc_sh2_off
+
+# Shc binding erbb2
+erbb2(Y1196~P) + shc(sh2) <-> erbb2(Y1196~P-1).shc(sh2-1)       (erbb2_pY1196_shc_sh2_on_3@3, erbb2_pY1196_shc_sh2_on_2@2)       erbb2_pY1196_shc_sh2_off
+erbb2(Y1221~P) + shc(sh2) <-> erbb2(Y1221~P-1).shc(sh2-1)       (erbb2_pY1221_shc_sh2_on_3@3, erbb2_pY1221_shc_sh2_on_2@2)       erbb2_pY1221_shc_sh2_off
+erbb2(Y1248~P) + shc(sh2) <-> erbb2(Y1248~P-1).shc(sh2-1)       (erbb2_pY1248_shc_sh2_on_3@3, erbb2_pY1248_shc_sh2_on_2@2)       erbb2_pY1248_shc_sh2_off
+
+# ErbB1 phosphorylation of Shc
+erbb1(Y992~P-1).shc(sh2-1,Y317)  -> erbb1(Y992~P-1).shc(sh2-1,Y317~P)   erbb1_phosphorylates_shc_Y317
+erbb1(Y1148~P-1).shc(sh2-1,Y317) -> erbb1(Y1148~P-1).shc(sh2-1,Y317~P)  erbb1_phosphorylates_shc_Y317
+erbb1(Y1173~P-1).shc(sh2-1,Y317) -> erbb1(Y1173~P-1).shc(sh2-1,Y317~P)  erbb1_phosphorylates_shc_Y317
+
+# ErbB2 phosphorylation of Shc
+#erbb2(Y1196~P-1).shc(sh2-1,Y317) -> erbb2(Y1196~P-1).shc(sh2-1,Y317~P)      erbb2_phosphorylates_shc_Y317
+#erbb2(Y1221~P-1).shc(sh2-1,Y317) -> erbb2(Y1221~P-1).shc(sh2-1,Y317~P)      erbb2_phosphorylates_shc_Y317
+#erbb2(Y1248~P-1).shc(sh2-1,Y317) -> erbb2(Y1248~P-1).shc(sh2-1,Y317~P)      erbb2_phosphorylates_shc_Y317
+
+# Shc non-mechanistic dephosphorylation
+shc(Y317~P) -> shc(Y317) shc_dephosphorylation_Y317
+
+# Grb2 binding shc
+shc(Y317~P) + grb2(sh2) <-> shc(Y317~P-1).grb2(sh2-1)    (shc_Y317_grb2_on_3@3, shc_Y317_grb2_on_2@2) shc_Y317_grb2_off
+
+# Sos binding grb2
+grb2(sh3N) + sos(pp) <-> grb2(sh3N-1).sos(pp-1)    	(grb2_sh3N_sos_on_3@3, grb2_sh3N_sos_on_2@2)     grb2_sh3N_sos_off
+
+# Ras binding sos
+sos(r) + hras(s) <-> sos(r-1).hras(s-1)               (sos_hras_on_3@3, sos_hras_on_2@2) 	sos_hras_off
+
+# Ras activation by sos
+sos(r-1).hras(s-1,nuc~GDP) -> sos(r-1).hras(s-1,nuc~GTP)  	sos_activates_hras
+
+# Ras self inactivation
+hras(nuc~GTP) -> hras(nuc~GDP)    ras_inactivation
+
+
+## Simplified downregulation
+# Non-mechanistic ubiquitination
+erbb1(Y1045~P,ub) -> erbb1(Y1045~P,ub~ub) erbb1_ubiquitination
+
+# Cbl binding erbb1
+#erbb1(Y1045~P) + ccbl(pp) <-> erbb1(Y1045~P-1).ccbl(pp-1) erbb1_Y1045_ccbl_on erbb1_Y1045_ccbl_off
+
+# Cbl ubiquitinating erbb1
+#erbb1(Y1045~P-1,ub).ccbl(pp-1) -> erbb1(Y1045~P-1,ub~ub).ccbl(pp-1) ccbl_ubiquitinates_erbb1
+
+# ErbB1 simplified degradation
+erbb1(ub~ub) -> 0 erbb1_polyubiquitinated_degredation
+
+
+## MAPK cascade
+# 14-3-3 double binding
+braf(s,S365~P) <-> braf(s,S365~P14_3_3g)    _14_3_3g_braf_self_on _14_3_3g_braf_self_off
+ksr1(s,S392~P) <-> ksr1(s,S392~P14_3_3g)    _14_3_3g_ksr1_self_on _14_3_3g_ksr1_self_on
+
+# Ras binds braf
+# Sos cannot already be bound to ras
+hras(s,nuc~GTP) + braf(r,S365~P) <-> hras(s-1,nuc~GTP).braf(r-1,S365~P)    (hras_braf_on_3@3, hras_braf_on_2@2) hras_braf_off
+
+# Raf dimerizes when 14-3-3 is not bound
+braf(s,S365~!P14_3_3g) + braf(s,S365~!P14_3_3g) <-> braf(s-1,S365~!P14_3_3g).braf(s-1,S365~!P14_3_3g)    (braf_braf_on_3@3, braf_braf_on_2@2) braf_braf_off
+
+# Ksr binds raf when 14-3-3 is not bound
+braf(s,S365~!P14_3_3g) + ksr1(s,S392~!P14_3_3g) <-> braf(s-1,S365~!P14_3_3g).ksr1(s-1,S392~!P14_3_3g)    braf_ksr1_on braf_ksr1_off
+
+# Raf phosphorylates mek when raf is dimerized
+mek1(S218) + braf(s-1).braf(s-1) -> mek1(S218~P) + braf(s-1).braf(s-1)    (braf_phosphorylates_mek1_S218_3@3, braf_phosphorylates_mek1_S218_2@2)
+mek1(S222) + braf(s-1).braf(s-1) -> mek1(S222~P) + braf(s-1).braf(s-1)    (braf_phosphorylates_mek1_S222_3@3, braf_phosphorylates_mek1_S222_2@2)
+
+# Mek non-mechanistic dephosphorylation
+mek1(S218~P) -> mek1(S218)  mek_dephosphorylation_S218
+mek1(S222~P) -> mek1(S222)  mek_dephosphorylation_S222
+
+# Mek binds ksr
+ksr1(f) + mek1(f) <-> ksr1(f-1).mek1(f-1)    ksr1_mek1_on ksr1_mek1_off
+
+# Erk binds mek
+mek1(f) + erk1(f) <-> mek1(f-1).erk1(f-1)    mek1_erk1_on mek1_erk1_off
+
+# Mek phosphorylates erk when either serine is phosphorylated
+mek1(f-1,S218~P).erk1(f-1,T202) -> mek1(f-1,S218~P).erk1(f-1,T202~P)    mek1_phosphorylates_erk1_T202
+mek1(f-1,S222~P).erk1(f-1,Y204) -> mek1(f-1,S222~P).erk1(f-1,Y204~P)    mek1_phosphorylates_erk1_Y204
+
+# PP2A dephosphorylates raf
+braf(S365~P) + pp2a(r)  <-> braf(S365~P-1).pp2a(r-1)    braf_pp2a_on braf_pp2a_off
+braf(S365~P-1).pp2a(r-1) -> braf(S365) + pp2a(r)      pp2a_dephosphorylates_braf_S365
+
+# PP2A dephosphorylates ksr
+ksr1(S392~P) + pp2a(r)  <-> ksr1(S392~P-1).pp2a(r-1)    ksr1_pp2a_on ksr1_pp2a_off
+ksr1(S392~P-1).pp2a(r-1) -> ksr1(S392) + pp2a(r)      pp2a_dephosphorylates_braf_S365
+
+# Erk dimerization only when doubly-phosphorylated
+erk1(f,T202~P,Y204~P) + erk1(f,T202~P,Y204~P) <-> erk1(f-1,T202~P,Y204~P).erk1(f-1,T202~P,Y204~P)    erk1_erk1_on erk1_erk1_off
+
+# Erk non-mechanistic dephosphorylation
+erk1(f,T202~P) -> erk1(f,T202) erk1_dephosphorylation_T202
+
+## Erk transport into nucleus
+# Import
+erk1(f-1,T202~P,Y204~P)@cell.erk1(f-1,T202~P,Y204~P)@cell -> erk1(f-1,T202~P,Y204~P)@nucleus.erk1(f-1,T202~P,Y204~P)@nucleus erk_dimer_nuclear_import
+
+# VHR dephosphorylates erk
+erk1(f,Y204~P) + vhr(k)  <-> erk1(f-1,Y204~P).vhr(k-1) vhr_erk1_on vhr_erk1_off
+erk1(f-1,Y204~P).vhr(k-1) -> erk1(f,Y204) + vhr(k)    vhr_dephosphorylates_erk1_Y204
+
+# Export
+erk1(f)@nucleus -> erk1(f)@cell erk_nuclear_export

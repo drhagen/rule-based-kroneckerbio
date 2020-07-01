@@ -1,0 +1,33 @@
+% Compartments
+v 3 1
+
+% Agents
+A(d,p~P)
+
+% Seeds v
+A(d-1,p~P).A(d-1,p~P) 1
+A(d-1,p).A(d-1,p~P) 1
+A(d-1,p).A(d-1,p) 1
+
+% Observables
+A#P A(d-A@d,p~P)
+
+% Parameters
+k 1
+
+% Rules
+A(d-1,p~P).A(d-1) -> A(d,p~P) + A(d) k
+
+# Refines into 2 fragments because the phosphates cooperate to eliminate the dimer
+# The same concentration of A(d-A@d,p~P) will decay faster when it exists as A(d-1,p~P).A(d-1,p~P) than
+# as A(d-1,p~P).A(d-1,p). This effect is captured by seperately tracking the amount of doubly and singly
+# phosphorylated species
+
+#% Species v
+#A(d-1;p~P)@{v}:A(d-1;p~P)@{v} A(d-1;p~P)@{v}:A(d-1;p~P)@{v}
+#A(d-1;p~P)@{v}:A(d-1;p)@{v} A(d-1;p)@{v}:A(d-1;p~P)@{v}
+
+#% Reactions
+#v.A(d-1;p~P)@{v}:A(d-1;p~P)@{v} 0 0 0 k*2 0
+
+#v.A(d-1;p~P)@{v}:A(d-1;p)@{v} 0 0 0 k 0

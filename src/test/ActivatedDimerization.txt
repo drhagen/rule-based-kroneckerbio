@@ -1,0 +1,28 @@
+% Compartments
+extracellular 3 100
+cell_membrane 2 1 extracellular
+cell 3 50
+
+% Agents
+egf(l)
+egfr(l,d)
+
+% Seeds extracellular
+egf(l) 1000
+
+% Seeds cell_membrane
+egfr(l,d) 100
+
+% Observables
+#EGFR:EGFR egf(l-2).egfr(l-2,d-1).egfr(l-3,d-1).egf(l-3)
+EGFR:EGFR egfr(l-egf@l,d-1).egfr(l-egf@l,d-1)
+
+% Parameters
+kon 20
+koff 7
+kdimer 10
+kundimer 5
+
+% Rules
+egf(l) + egfr(l,d) <-> egf(l-1).egfr(l-1,d)                     kon    koff
+egfr(l-!0,d) + egfr(l-!0,d) <-> egfr(l-!0,d-1).egfr(l-!0,d-1)   kdimer kundimer

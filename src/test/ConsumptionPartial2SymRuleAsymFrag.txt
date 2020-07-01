@@ -1,0 +1,27 @@
+% Compartments
+v 3 1
+
+% Agents
+A(d,p~P)
+
+% Seeds v
+A(d-1,p~P).A(d-1,p~P) 1
+A(d-1,p).A(d-1,p~P) 1
+A(d-1,p).A(d-1,p) 1
+
+% Observables
+A#P A(d-A@d,p~P)
+
+% Parameters
+k 1
+
+% Rules
+A(d-1).A(d-1) -> A(d) + A(d) k
+
+# Only the trivial extension of the partial bond is refined. Then the fragment is not partially consumed.
+
+% Species v
+A(d-1;p~P)@{v}:A(d-1)@{v} A(d-1;p~P)@{v}:A(d-1;p~P)@{v}*2+A(d-1;p)@{v}:A(d-1;p~P)@{v}
+
+% Reactions
+v.A(d-1;p~P)@{v}:A(d-1)@{v} 0 0 0 k 0
